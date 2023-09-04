@@ -1,15 +1,21 @@
 import * as fs from 'fs';
+import {fileURLToPath} from 'url';
+import path from 'path';
 
-let rawdata = fs.readFileSync('./data/dizi.json')
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+let rawdata = fs.readFileSync(__dirname + '/data/dizi.json')
 const $dizi = JSON.parse(rawdata);
 
-rawdata = fs.readFileSync('./data/tiangan.json');
+rawdata = fs.readFileSync(__dirname + '/data/tiangan.json');
 const $tiangang = JSON.parse(rawdata);
 
-rawdata = fs.readFileSync('./data/dates_mapping.json');
+rawdata = fs.readFileSync(__dirname + '/data/dates_mapping.json');
 const $dates_mapping = JSON.parse(rawdata);
 
-rawdata = fs.readFileSync('./data/hour_mapping.json');
+rawdata = fs.readFileSync(__dirname + '/data/hour_mapping.json');
 const $hour_mapping = JSON.parse(rawdata);
 
 export default class BaziConverter{
