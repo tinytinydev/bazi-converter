@@ -7,7 +7,7 @@
 
 
 ## Using it
-You can get a new Bazi result by initialising the BaziConverter with these params: Year, Month, Day, Time (in 24 hour format)
+You can get a new Bazi result by initialising the BaziConverter with these params: Year, Month, Day, Hour of birth (in 24 hour format)
 ```
 import BaziConverter from 'bazi-converter'
 
