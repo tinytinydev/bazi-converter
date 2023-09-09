@@ -1,0 +1,50 @@
+{
+  "子": {
+    "animal_mnemonic": "Rat",
+    "element": "Water"
+  },
+  "丑": {
+    "animal_mnemonic": "Ox",
+    "element": "Earth"
+  },
+  "寅": {
+    "animal_mnemonic": "Tiger",
+    "element": "Wood"
+  },
+  "卯": {
+    "animal_mnemonic": "Rabbit",
+    "element": "Wood"
+  },
+  "辰": {
+    "animal_mnemonic": "Dragon",
+    "element": "Earth"
+  },
+  "巳": {
+    "animal_mnemonic": "Snake",
+    "element": "Fire"
+  },
+  "午": {
+    "animal_mnemonic": "Horse",
+    "element": "Fire"
+  },
+  "未": {
+    "animal_mnemonic": "Goat",
+    "element": "Earth"
+  },
+  "申": {
+    "animal_mnemonic": "Monkey",
+    "element": "Metal"
+  },
+  "酉": {
+    "animal_mnemonic": "Rooster",
+    "element": "Metal"
+  },
+  "戌": {
+    "animal_mnemonic": "Dog",
+    "element": "Earth"
+  },
+  "亥": {
+    "animal_mnemonic": "Pig",
+    "element": "Water"
+  }
+}
