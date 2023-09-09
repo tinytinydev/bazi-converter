@@ -4,7 +4,8 @@
   "description": "Used to convert English date into bazi",
   "main": "BaziConverter.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-docs": "jsdoc2md -f BaziConverter.js > docs.md"
   },
   "keywords": [
     "Bazi",
@@ -20,7 +21,9 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "fs": "^0.0.1-security",
-    "playwright": "^1.37.1"
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "jsdoc-to-markdown": "^8.0.0"
   }
 }
