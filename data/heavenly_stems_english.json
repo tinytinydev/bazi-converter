@@ -1,0 +1,42 @@
+{
+  "甲": {
+    "element": "Wood",
+    "organ": "Gall Bladder"
+  },
+  "乙": {
+    "element": "Wood",
+    "organ": "Liver"
+  },
+  "丙": {
+    "element": "Fire",
+    "organ": "Small Intestine"
+  },
+  "丁": {
+    "element": "Fire",
+    "organ": "Heart"
+  },
+  "戊": {
+    "element": "Earth",
+    "organ": "Stomach"
+  },
+  "己": {
+    "element": "Earth",
+    "organ": "Spleen"
+  },
+  "庚": {
+    "element": "Metal",
+    "organ": "Large Intestine"
+  },
+  "辛": {
+    "element": "Metal",
+    "organ": "Lung"
+  },
+  "壬": {
+    "element": "Water",
+    "organ": "Urinary Bladder"
+  },
+  "癸": {
+    "element": "Water",
+    "organ": "Kidney"
+  }
+}
