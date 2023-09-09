@@ -153,7 +153,7 @@ export default class BaziConverter{
         const earthly_branch_mapping = $earthly_branches_english_map.get(earthly_branch);
 
         return {
-            "element": earthly_branch_mapping.element,
+            "element": heavenly_stem_mapping.element,
             "animal_mnemonic": earthly_branch_mapping.animal_mnemonic
         }
     }
