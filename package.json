@@ -1,6 +1,6 @@
 {
   "name": "bazi-converter",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Used to convert English date into bazi",
   "main": "BaziConverter.js",
   "scripts": {
@@ -13,7 +13,9 @@
     "Taoism",
     "Taoist"
   ],
-  "files":["data"],
+  "files": [
+    "data"
+  ],
   "author": "tinytinydev",
   "license": "MIT",
   "type": "module",
