@@ -5,7 +5,6 @@ import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
 let rawdata = fs.readFileSync(__dirname + '/data/dizi.json')
 const $dizi = JSON.parse(rawdata);
 
@@ -17,6 +16,9 @@ const $dates_mapping = JSON.parse(rawdata);
 
 rawdata = fs.readFileSync(__dirname + '/data/hour_mapping.json');
 const $hour_mapping = JSON.parse(rawdata);
+
+rawdata = fs.readFileSync(__dirname + '/data/earthly_branches_english.json');
+const $earthly_branches_english = JSON.parse(rawdata);
 
 export default class BaziConverter{
 

@@ -9,16 +9,15 @@
 ## Using it
 
 You can get a new Bazi result by initialising the BaziConverter with these params: Year, Month, Day, Hour of birth (in 24 hour format)
-
-```
+```javascript
 import BaziConverter from 'bazi-converter'
 
 let bazi = new BaziConverter(1993,5,10,20);
 
-// returns { year: '癸酉', month: '丁巳', day: '辛卯', time: '戊戌' }
+//returns { year: '癸酉', month: '丁巳', day: '辛卯', time: '戊戌' }
 console.log(bazi.getBaziJson())
 
-// returns 癸酉年丁巳月辛卯日戊戌时
+//returns 癸酉年丁巳月辛卯日戊戌时
 console.log(bazi.getBaziChineseFullString());
 
 ```

@@ -20,6 +20,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "playwright": "^1.37.1"
   }
 }
