@@ -21,6 +21,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
+    "bazi-converter": "^1.0.8",
     "fs": "^0.0.1-security"
   },
   "devDependencies": {
