@@ -1,9 +1,13 @@
+
 import {fileURLToPath} from 'url';
 import path from 'path';
 import { loadRawData, loadRawDataToMap } from './functions/common.js';
 
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 
 const $dizi = loadRawData(__dirname + '/data/dizi.json');
 const $tiangang = loadRawData(__dirname + '/data/tiangan.json');
@@ -73,8 +77,39 @@ export default class BaziConverter {
       return "E12";
     } else {
       return "-";
+
+  /**
+   * convertToTianGangNumber To indicate the number to be related to heavenly stem
+   * @param {integer} HNumber
+   * @returns {String} Returns TianGangNumber (or heavenly stem number)
+   */
+  convertToTianGangNumber(HNumber) {
+    return "H" + HNumber;
+  }
+
+  /**
+   * convertToDiziNumber To indicate the number to be related to earthly branch
+   * @param {integer} ENumber
+   * @returns {String} Returns DiziNumber (or earthly branch number)
+   */
+  convertToDiziNumber(ENumber) {
+    return "E" + ENumber;
+  }
+
+  /**
+   * getBaziJson To compute bazi result from provided parameters
+   * @returns {JSON} Returns bazi result related to the 4 pillars
+   */
+  getBaziJson() {
+    const baziDate = $dates_mapping[this.year][this.month][this.day];
+    const earthHour = this.getEarthNumberFromHour(this.hour);
+    let hourMapping = "吉";
+
+    if (earthHour !== "-") {
+      hourMapping = $hour_mapping[earthHour][baziDate.HDay];
     }
   }
+
 
   /**
    * convertToTianGangNumber To indicate the number to be related to heavenly stem
@@ -197,6 +232,7 @@ export default class BaziConverter {
       time: `${baziChineseTimeEnglish.element} ${baziChineseTimeEnglish.animal_mnemonic}`,
     };
 
+
     return englishMapping;
   }
 
@@ -269,4 +305,5 @@ export default class BaziConverter {
 
         return baziJson;
     }
+
 }
