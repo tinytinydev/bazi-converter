@@ -9,7 +9,8 @@
 
 <dl>
 <dt><a href="#getEarthNumberFromHour">getEarthNumberFromHour(hour)</a></dt>
-<dd><p>getEarthNumberFromHour To get the Earth Number (or DiziNumber) based on the hour provided</p>
+<dd><p>getEarthNumberFromHour To get the Earth Number (or DiziNumber) based on the hour provided.
+A &quot;-&quot;&quot; will be returned if the hour value is not recognized.</p>
 </dd>
 <dt><a href="#convertToTianGangNumber">convertToTianGangNumber(HNumber)</a> ⇒ <code>String</code></dt>
 <dd><p>convertToTianGangNumber To indicate the number to be related to heavenly stem</p>
@@ -28,6 +29,15 @@
 </dd>
 <dt><a href="#translateBaziEnglish">translateBaziEnglish()</a> ⇒ <code>JSON</code></dt>
 <dd><p>translateBaziEnglish Translate the bazi results from Chinese to English</p>
+</dd>
+<dt><a href="#getBaziEnglishMapping">getBaziEnglishMapping(baziChinese)</a> ⇒ <code>JSON</code></dt>
+<dd><p>getBaziEnglishMapping Each pillar consist of 2 characters for the bazi in the format of heavenly stem + earthly stem</p>
+</dd>
+<dt><a href="#getElementalZodiacMappingChinese">getElementalZodiacMappingChinese(baziEnglish)</a> ⇒ <code>String</code></dt>
+<dd><p>getElementalZodiacMappingChinese To get the element and zodiac that are commonly used</p>
+</dd>
+<dt><a href="#getBaziJsonWithElementalZodiac">getBaziJsonWithElementalZodiac()</a> ⇒ <code>JSON</code></dt>
+<dd><p>getBaziJsonWithElementalZodiac To compute bazi result with commonly used terms i.e. element and zodiac (or animal mnemonic)</p>
 </dd>
 </dl>
 
@@ -49,7 +59,8 @@
 <a name="getEarthNumberFromHour"></a>
 
 ## getEarthNumberFromHour(hour)
-getEarthNumberFromHour To get the Earth Number (or DiziNumber) based on the hour provided
+getEarthNumberFromHour To get the Earth Number (or DiziNumber) based on the hour provided.
+A "-"" will be returned if the hour value is not recognized.
 
 **Kind**: global function  
 
@@ -114,3 +125,34 @@ translateBaziEnglish Translate the bazi results from Chinese to English
 
 **Kind**: global function  
 **Returns**: <code>JSON</code> - Returns bazi result related to the 4 pillars in English  
+<a name="getBaziEnglishMapping"></a>
+
+## getBaziEnglishMapping(baziChinese) ⇒ <code>JSON</code>
+getBaziEnglishMapping Each pillar consist of 2 characters for the bazi in the format of heavenly stem + earthly stem
+
+**Kind**: global function  
+**Returns**: <code>JSON</code> - Returns the associated animal mnemonic and element in English  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| baziChinese | <code>String</code> | A valid bazi (2 Chinese characters) from any of the 4 pillars |
+
+<a name="getElementalZodiacMappingChinese"></a>
+
+## getElementalZodiacMappingChinese(baziEnglish) ⇒ <code>String</code>
+getElementalZodiacMappingChinese To get the element and zodiac that are commonly used
+
+**Kind**: global function  
+**Returns**: <code>String</code> - Returns the associated animal mnemonic (or zodiac)and element in Chinese  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| baziEnglish | <code>String</code> | A valid bazi in English (Element + Animal Mnemonic) from any of the 4 pillars |
+
+<a name="getBaziJsonWithElementalZodiac"></a>
+
+## getBaziJsonWithElementalZodiac() ⇒ <code>JSON</code>
+getBaziJsonWithElementalZodiac To compute bazi result with commonly used terms i.e. element and zodiac (or animal mnemonic)
+
+**Kind**: global function  
+**Returns**: <code>JSON</code> - Return the Bazi result with commonly used terms in Chinese  
