@@ -5,7 +5,6 @@ import BaziConverter from "./BaziConverter.js";
 let bazi = new BaziConverter(1994, 5, 10, 21);
 console.log("===NORMAL CASE===");
 console.log(bazi.getBaziJson());
-
 console.log(bazi.getBaziJsonWithElementalZodiac());
 console.log(bazi.translateBaziEnglish());
 console.log(bazi.getBaziChineseFullString());
@@ -14,5 +13,6 @@ console.log(bazi.getBaziChineseFullString());
 bazi = new BaziConverter(1993, 5, 10, -1);
 console.log("===NO HOUR CASE===");
 console.log(bazi.getBaziJson());
+console.log(bazi.getBaziJsonWithElementalZodiac());
 console.log(bazi.translateBaziEnglish());
 console.log(bazi.getBaziChineseFullString());
