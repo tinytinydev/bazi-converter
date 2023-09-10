@@ -1,33 +1,22 @@
-import * as fs from "fs";
-import { fileURLToPath } from "url";
-import path from "path";
+
+import {fileURLToPath} from 'url';
+import path from 'path';
+import { loadRawData, loadRawDataToMap } from './functions/common.js';
+
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-let rawdata = fs.readFileSync(__dirname + "/data/dizi.json");
-const $dizi = JSON.parse(rawdata);
 
-rawdata = fs.readFileSync(__dirname + "/data/tiangan.json");
-const $tiangang = JSON.parse(rawdata);
-
-rawdata = fs.readFileSync(__dirname + "/data/dates_mapping.json");
-const $dates_mapping = JSON.parse(rawdata);
-
-rawdata = fs.readFileSync(__dirname + "/data/hour_mapping.json");
-const $hour_mapping = JSON.parse(rawdata);
-
-rawdata = fs.readFileSync(__dirname + "/data/earthly_branches_english.json");
-const $earthly_branches_english_json = JSON.parse(rawdata);
-const $earthly_branches_english_map = new Map(
-  Object.entries($earthly_branches_english_json)
-);
-
-rawdata = fs.readFileSync(__dirname + "/data/heavenly_stems_english.json");
-const $heavenly_stems_english_json = JSON.parse(rawdata);
-const $heavenly_stems_english_map = new Map(
-  Object.entries($heavenly_stems_english_json)
-);
+const $dizi = loadRawData(__dirname + '/data/dizi.json');
+const $tiangang = loadRawData(__dirname + '/data/tiangan.json');
+const $dates_mapping = loadRawData(__dirname + '/data/dates_mapping.json');
+const $hour_mapping = loadRawData(__dirname + '/data/hour_mapping.json');
+const $earthly_branches_english_map = loadRawDataToMap(__dirname + '/data/earthly_branches_english.json');
+const $heavenly_stems_english_map = loadRawDataToMap(__dirname + '/data/heavenly_stems_english.json');
+const $elements_mapping = loadRawDataToMap(__dirname + '/data/elements_mapping.json');
+const $zodic_mapping = loadRawDataToMap(__dirname + '/data/zodiac_mapping.json');
 
 /**
  * @class BaziConverter
@@ -88,8 +77,39 @@ export default class BaziConverter {
       return "E12";
     } else {
       return "-";
+
+  /**
+   * convertToTianGangNumber To indicate the number to be related to heavenly stem
+   * @param {integer} HNumber
+   * @returns {String} Returns TianGangNumber (or heavenly stem number)
+   */
+  convertToTianGangNumber(HNumber) {
+    return "H" + HNumber;
+  }
+
+  /**
+   * convertToDiziNumber To indicate the number to be related to earthly branch
+   * @param {integer} ENumber
+   * @returns {String} Returns DiziNumber (or earthly branch number)
+   */
+  convertToDiziNumber(ENumber) {
+    return "E" + ENumber;
+  }
+
+  /**
+   * getBaziJson To compute bazi result from provided parameters
+   * @returns {JSON} Returns bazi result related to the 4 pillars
+   */
+  getBaziJson() {
+    const baziDate = $dates_mapping[this.year][this.month][this.day];
+    const earthHour = this.getEarthNumberFromHour(this.hour);
+    let hourMapping = "吉";
+
+    if (earthHour !== "-") {
+      hourMapping = $hour_mapping[earthHour][baziDate.HDay];
     }
   }
+
 
   /**
    * convertToTianGangNumber To indicate the number to be related to heavenly stem
@@ -212,6 +232,78 @@ export default class BaziConverter {
       time: `${baziChineseTimeEnglish.element} ${baziChineseTimeEnglish.animal_mnemonic}`,
     };
 
+
     return englishMapping;
   }
+
+
+    /**
+     * getBaziEnglishMapping Each pillar consist of 2 characters for the bazi in the format of heavenly stem + earthly stem
+     * @method
+     * @param {String} baziChinese A valid bazi (2 Chinese characters) from any of the 4 pillars
+     * @returns {JSON} Returns the associated animal mnemonic and element in English
+     */
+    getBaziEnglishMapping(baziChinese) {
+        const baziChineseArr = baziChinese.split("");
+        const heavenly_stem = baziChineseArr[0];
+        const earthly_branch = baziChineseArr[1];
+
+        const heavenly_stem_mapping = $heavenly_stems_english_map.get(heavenly_stem);
+        const earthly_branch_mapping = $earthly_branches_english_map.get(earthly_branch);
+
+        return {
+            "element": heavenly_stem_mapping.element,
+            "animal_mnemonic": earthly_branch_mapping.animal_mnemonic
+        }
+    }
+
+    /**
+     * getElementalZodiacMappingChinese To get the element and zodiac that are commonly used
+     * @method
+     * @param {String} baziEnglish A valid bazi in English (Element + Animal Mnemonic) from any of the 4 pillars
+     * @returns {String} Returns the associated animal mnemonic (or zodiac)and element in Chinese
+     */
+    getElementalZodiacMappingChinese(baziEnglish) {
+        const baziEnglishArr = baziEnglish.split(" ");
+        const element = baziEnglishArr[0];
+        const zodiac = baziEnglishArr[1];
+
+        const chinese_element = $elements_mapping.get(element);
+        const chinese_zodiac = $zodic_mapping.get(zodiac);
+
+        return chinese_element + chinese_zodiac;
+
+    }
+    
+    /**
+     * getBaziJsonWithElementalZodiac To compute bazi result with commonly used terms i.e. element and zodiac (or animal mnemonic)
+     * @method
+     * @returns {JSON} Return the Bazi result with commonly used terms in Chinese
+     */
+    getBaziJsonWithElementalZodiac(){
+        const baziJsonEnglish = this.translateBaziEnglish()
+        
+        const baziJsonEnglishYear = baziJsonEnglish.year
+        const baziJsonEnglishMonth = baziJsonEnglish.month
+        const baziJsonEnglishDay = baziJsonEnglish.day
+        const baziJsonEnglishTime = baziJsonEnglish.time
+
+        // EZ = Elemental Zodiac
+        const baziYearEZ = this.getElementalZodiacMappingChinese(baziJsonEnglishYear);
+        const baziMonthEZ = this.getElementalZodiacMappingChinese(baziJsonEnglishMonth);
+        const baziDayEZ = this.getElementalZodiacMappingChinese(baziJsonEnglishDay);
+        const baziTimeEZ = this.getElementalZodiacMappingChinese(baziJsonEnglishTime);
+
+        let baziJson = this.getBaziJson();
+
+        baziJson.simplified = {
+            "year": baziYearEZ,
+            "month": baziMonthEZ,
+            "day": baziDayEZ,
+            "time": baziTimeEZ
+        };
+
+        return baziJson;
+    }
+
 }

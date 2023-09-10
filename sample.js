@@ -5,6 +5,8 @@ import BaziConverter from "./BaziConverter.js";
 let bazi = new BaziConverter(1994, 5, 10, 21);
 console.log("===NORMAL CASE===");
 console.log(bazi.getBaziJson());
+
+console.log(bazi.getBaziJsonWithElementalZodiac());
 console.log(bazi.translateBaziEnglish());
 console.log(bazi.getBaziChineseFullString());
 
