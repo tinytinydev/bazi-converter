@@ -1,7 +1,6 @@
 import * as fs from "fs";
 import { fileURLToPath } from "url";
 import path from "path";
-import { validateHeaderValue } from "http";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +23,7 @@ const $earthly_branches_english_map = new Map(
   Object.entries($earthly_branches_english_json)
 );
 
+rawdata = fs.readFileSync(__dirname + "/data/heavenly_stems_english.json");
 const $heavenly_stems_english_json = JSON.parse(rawdata);
 const $heavenly_stems_english_map = new Map(
   Object.entries($heavenly_stems_english_json)
@@ -59,6 +59,9 @@ export default class BaziConverter {
    * @param {integer} hour - hour of the individual is born
    */
   getEarthNumberFromHour(hour) {
+    if (hour < 0) {
+      return "-";
+    }
     if (hour >= 23 || hour < 1) {
       return "E1";
     } else if (hour < 3) {
@@ -160,15 +163,15 @@ export default class BaziConverter {
    * @returns {JSON} Returns the associated animal mnemonic, element and organ
    */
   getBaziEnglishMapping(baziChinese) {
-    console.log(baziChinese);
     const baziChineseArr = baziChinese.split("");
+
+    if (baziChineseArr.length == 1) {
+      return baziChinese; //If it is 1 word means it is a unknown time: 吉
+    }
     const heavenly_stem = baziChineseArr[0];
     const earthly_branch = baziChineseArr[1];
-    console.log($heavenly_stems_english_map);
     const heavenly_stem_mapping =
       $heavenly_stems_english_map.get(heavenly_stem);
-
-    console.log(heavenly_stem_mapping);
     const earthly_branch_mapping =
       $earthly_branches_english_map.get(earthly_branch);
 
@@ -193,8 +196,14 @@ export default class BaziConverter {
     const baziChineseMonthEnglish =
       this.getBaziEnglishMapping(baziChineseMonth);
     const baziChineseDayEnglish = this.getBaziEnglishMapping(baziChineseDay);
-    console.log(baziChineseTime);
-    const baziChineseTimeEnglish = this.getBaziEnglishMapping(baziChineseTime);
+
+    let baziChineseTimeEnglish = {
+      element: "Lucky",
+      animal_mnemonic: "Timing",
+    };
+    if (baziChineseTime !== "吉") {
+      baziChineseTimeEnglish = this.getBaziEnglishMapping(baziChineseTime);
+    }
 
     let englishMapping = {
       year: `${baziChineseYearEnglish.element} ${baziChineseYearEnglish.animal_mnemonic}`,
