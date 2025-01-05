@@ -1,6 +1,6 @@
 {
   "name": "bazi-converter",
-  "version": "1.0.10",
+  "version": "1.0.20",
   "description": "Used to convert English date into bazi",
   "main": "BaziConverter.js",
   "scripts": {
