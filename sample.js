@@ -16,3 +16,19 @@ console.log(bazi.getBaziJson());
 console.log(bazi.getBaziJsonWithElementalZodiac());
 console.log(bazi.translateBaziEnglish());
 console.log(bazi.getBaziChineseFullString());
+
+// For calculation where hour is not recognized
+bazi = new BaziConverter(2025, 5, 10, 21);
+console.log("===2025 test case===");
+console.log(bazi.getBaziJson());
+console.log(bazi.getBaziJsonWithElementalZodiac());
+console.log(bazi.translateBaziEnglish());
+console.log(bazi.getBaziChineseFullString());
+
+// For calculation where hour is not recognized
+bazi = new BaziConverter(2030, 5, 10, 21);
+console.log("===2030 test case===");
+console.log(bazi.getBaziJson());
+console.log(bazi.getBaziJsonWithElementalZodiac());
+console.log(bazi.translateBaziEnglish());
+console.log(bazi.getBaziChineseFullString());
