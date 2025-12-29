@@ -47,3 +47,12 @@ This data allowed me to create a simple mapping and conversion logic for Bazi. I
 # Contact
 
 If you find any bugs or issues, please reach out to me on LinkedIn: https://www.linkedin.com/in/eugene-choy-wj/
+
+# Licensing
+The library code is licensed and distributed under MIT.
+The scraped mapping/data is licensed under CC BY-SA 4.0 with the data being scrapped from the following links:
+https://en.wikibooks.org/wiki/Ba_Zi/1991 - https://en.wikibooks.org/wiki/Ba_Zi/2033
+https://en.wikibooks.org/wiki/Ba_Zi/Hour_Pillar
+https://en.wikibooks.org/wiki/Ba_Zi/Heavenly_Stems
+https://en.wikibooks.org/wiki/Ba_Zi/Earthly_Branches
+Refer to DATA_LICENSE for more information about the CC BY-SA 4.0 license.
